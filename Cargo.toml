@@ -1,0 +1,12 @@
+[package]
+name = "rust-cryptography-engineering"
+version = "0.1.0"
+edition = "2021"
+
+[[bin]]
+name = "run-exercises"
+path = "./src/main.rs"
+
+[dependencies]
+clap = { version = "4.0.32", features = ["derive"] }
+ring = "0.16.20"
