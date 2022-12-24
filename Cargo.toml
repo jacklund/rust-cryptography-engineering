@@ -9,4 +9,5 @@ path = "./src/main.rs"
 
 [dependencies]
 clap = { version = "4.0.32", features = ["derive"] }
+hex = "0.4.3"
 ring = "0.16.20"
