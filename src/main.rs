@@ -11,7 +11,10 @@ fn sha512_n(value: &[u8], bytes: usize) -> Vec<u8> {
 #[derive(Clone, Debug, PartialEq, Eq, PartialOrd, Ord, Subcommand)]
 enum Exercises {
     #[command(name = "5.3")]
-    E5_3 { bytes: usize, times: usize },
+    E5_3 {
+        bytes: usize,
+        times: usize,
+    },
 
     #[command(name = "5.4")]
     E5_4 {
@@ -19,6 +22,8 @@ enum Exercises {
         message: String,
         times: usize,
     },
+
+    Blake3Bench,
 }
 
 #[derive(Parser, Debug)]
@@ -37,5 +42,8 @@ fn main() {
             message,
             times,
         } => exercise_5_4(bytes, &message, times),
+        Exercises::Blake3Bench => {
+            println!("Run 'cargo bench'");
+        }
     }
 }
