@@ -1,8 +1,9 @@
-use crate::chapter_5::*;
+use crate::{homework_1::*, homework_3::*};
 use clap::{Parser, Subcommand};
 use ring::digest;
 
-pub mod chapter_5;
+pub mod homework_1;
+pub mod homework_3;
 
 fn sha512_n(value: &[u8], bytes: usize) -> Vec<u8> {
     digest::digest(&digest::SHA512, value).as_ref()[..bytes].into()
@@ -10,6 +11,14 @@ fn sha512_n(value: &[u8], bytes: usize) -> Vec<u8> {
 
 #[derive(Clone, Debug, PartialEq, Eq, PartialOrd, Ord, Subcommand)]
 enum Exercises {
+    VignereEncrypt {
+        key: String,
+        plaintext: String,
+    },
+    VignereDecrypt {
+        key: String,
+        ciphertext: String,
+    },
     #[command(name = "5.3")]
     E5_3 {
         bytes: usize,
@@ -36,6 +45,8 @@ fn main() {
     let args = Args::parse();
 
     match args.exercise {
+        Exercises::VignereEncrypt { key, plaintext } => vignere::encrypt(&key, &plaintext),
+        Exercises::VignereDecrypt { key, ciphertext } => vignere::decrypt(&key, &ciphertext),
         Exercises::E5_3 { bytes, times } => exercise_5_3(bytes, times),
         Exercises::E5_4 {
             bytes,
